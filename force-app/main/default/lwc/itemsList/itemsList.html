@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <template for:each={items.data} for:item="item">
+            <template if:true={items.data}>
+                <lightning-card key={item.Id} class="slds-col slds-size_4-of-12 slds-p-around_xx-large" style="align-items: center; text-align: center;">
+                    <p class="slds-text-heading_large">{item.Name}</p><br/>
+                    <img src={item.Image_URL__c} width="150px" height="250px" alt="Product" style="border: 5px solid #555;">
+                    <p class="slds-text-body_small">SKU: {item.SKU__c}</p><br/>
+                    <p class="slds-text-heading_medium">${item.Total__c}</p><br/>
+                    <lightning-button variant="brand" label="Buy" title="Buy" onclick={handleClick} id={item.Id}></lightning-button>
+                </lightning-card>
+            </template>
+            <template if:true={items.error}>
+                <h1 key={item.Id}>No data</h1>
+            </template>
+        </template>
+    </div>
+</template>

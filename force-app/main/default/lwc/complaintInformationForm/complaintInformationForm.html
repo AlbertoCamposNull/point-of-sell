@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12"></div>
+        <div class="slds-col slds-size_6-of-12">
+            <lightning-input required type="text" label="Subject" onchange={handleSubjectChange}></lightning-input>
+            <lightning-textarea required label="Complaint (Description)" onchange={handleDescriptionChange}></lightning-textarea>    
+            <lightning-input-address
+                required
+                address-label="Address"
+                street-label="Street"
+                city-label="City"
+                country-label="Country"
+                province-label="Province"
+                postal-code-label="PostalCode"
+                onchange={handleAddressChange}>
+            </lightning-input-address> 
+            <div style="text-align: right;">
+                <lightning-button variant="brand" label="Send" title="Send" onclick={handleCreateCaseClick} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+        <div class="slds-col slds-size_3-of-12"></div>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <div style="height:24rem">
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header slds-theme_success slds-theme_alert-texture">
+                <h1 class="slds-text-heading_medium" id="prompt-heading-id">Complaint Submited!</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                <p>Case Number: {caseNumber}</p>
+                </div>
+                <div class="slds-modal__footer slds-theme_default">
+                <button class="slds-button slds-button_neutral" onclick={closeModal}>Got it</button>
+                </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </div>
+    </template>
+
+</template>

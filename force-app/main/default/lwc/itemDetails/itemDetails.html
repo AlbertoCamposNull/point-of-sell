@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <template for:each={record.data} for:item="item">
+                <lightning-card key={item.Id} class="slds-col slds-size_8-of-12 slds-p-around_xx-large" style="align-items: center; text-align: center;">
+                    <p class="slds-text-heading_large">{item.Name}</p><br/>
+                    <img src={item.Image_URL__c}  width="150px" alt="Product" style="border: 5px solid #555;">
+                    <p class="slds-text-body_small">SKU: {item.SKU__c}</p><br/>
+                    <p class="slds-text-body_small">${item.Price__c} + %{item.VAT__c}</p><br/>
+                    <p class="slds-text-heading_large">${item.Total__c}</p>
+                </lightning-card>
+                <div key={item.Id} class="slds-col slds-size_4-of-12 slds-p-around_xx-large" style="align-items: center; text-align: center;">
+                    <lightning-combobox
+                        name="customer"
+                        value={id}
+                        label="Select a Customer"
+                        placeholder="Select a Customer"
+                        options={options}
+                        onchange={handleComboboxChange}>
+                    </lightning-combobox>
+                    <lightning-button variant="brand" label="Buy now" title="Buy now" onclick={buyClick} class="slds-m-left_x-small"></lightning-button>
+                </div>
+        </template>
+    </div>
+    <template if:true={isModalOpen}>
+        <div style="height:24rem">
+            <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header slds-theme_success slds-theme_alert-texture">
+                <h1 class="slds-text-heading_medium" id="prompt-heading-id">Purchase Done!</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                <p>Thank you for choosing the best page, AMAZUN!</p>
+                </div>
+                <div class="slds-modal__footer slds-theme_default">
+                <button class="slds-button slds-button_neutral" onclick={closeModal}>The pleasure is mine!</button>
+                </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </div>
+    </template>
+</template>
